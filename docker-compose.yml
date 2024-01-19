@@ -1,0 +1,17 @@
+version: "3.0"
+
+services:
+  app:
+    image: deneva/rna-pr:master
+    container_name: ams
+    restart: always
+    volumes:
+      - .:/var/www/html
+    ports:
+      - '127.0.0.1:8087:80'
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
