@@ -93,7 +93,7 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <div class="card-title badge badge-success">
+                                    <div class="card-title badge badge-primary">
                                         <h6>Storage</h6>
                                     </div>
                                     <div class="table-responsive">
@@ -163,6 +163,15 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+                                    <div class="pagination-container">
+                                        <pagination
+                                            :data="inStorage"
+                                            @pagination-change-page="
+                                                loadInStorage
+                                            "
+                                            :limit="25"
+                                        ></pagination>
                                     </div>
                                     <div class="card-title badge badge-danger">
                                         <h6>Broken</h6>
@@ -235,19 +244,18 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
-                                <!-- /.card-body -->
-                                <div class="card-footer">
                                     <div class="pagination-container">
                                         <pagination
                                             :data="inBroken"
                                             @pagination-change-page="
-                                                loadInStorage
+                                                loadInBroken
                                             "
                                             :limit="25"
                                         ></pagination>
                                     </div>
                                 </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer"></div>
                             </div>
                         </div>
 
@@ -343,9 +351,9 @@ export default {
                 .catch((error) => console.log(error))
         },
 
-        loadInBroken() {
+        loadInBroken(page = 1) {
             axios
-                .get('/api/dashboard/inbroken')
+                .get(`/api/dashboard/inbroken?page=${page}`)
                 .then((data) => (this.inBroken = data.data.data))
                 .catch((error) => console.log(error))
         },
