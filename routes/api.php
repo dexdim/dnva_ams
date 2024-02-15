@@ -27,14 +27,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('App\Http\Controllers\API')->group(function () {
     //GET
     Route::get('profile', 'ProfileController@profile');
-    Route::get('category/list', 'CategoryController@list');
     Route::get('user/list', 'UserController@list');
     Route::get('inventory', 'InventoryController@index');
-    Route::get('inventory/search', 'InventoryController@search');
-    Route::get('employee/list', 'EmployeeController@list');
     Route::get('inventory/all', 'InventoryController@all');
+    Route::get('inventory/search', 'InventoryController@search');
+    Route::get('category/list', 'CategoryController@list');
+    Route::get('employee/list', 'EmployeeController@list');
     Route::get('dashboard/count', 'InventoryController@counts');
     Route::get('dashboard/instorage', 'InventoryController@inStorage');
+    Route::get('dashboard/inbroken', 'InventoryController@inBroken');
     //POST
     Route::post('change-password', 'ProfileController@changePassword');
     Route::post('inventory/duplicate/{id}', 'InventoryController@duplicate');

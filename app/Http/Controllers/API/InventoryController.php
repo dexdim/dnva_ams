@@ -57,6 +57,12 @@ class InventoryController extends BaseController
         return $this->sendResponse($inventories, 'In Storage List');
     }
 
+    public function inBroken()
+    {
+        $inventories = $this->inventory->where('status', 'Broken')->latest()->with('category', 'employee')->paginate(5);
+        return $this->sendResponse($inventories, 'In Storage List');
+    }
+
     /**
      * Store a newly created resource in storage.
      * @param  App\Http\Requests\Inventory\InventoryRequest  $request
@@ -134,10 +140,10 @@ class InventoryController extends BaseController
         $storage = $this->inventory->where('status', 'Storage')->count();
         $inservice = $this->inventory->where('status', 'In Service')->count();
         $broken = $this->inventory->where('status', 'Broken')->count();
-        $laptop = $this->inventory->where('category_id', '8')->count();
-        $monitor = $this->inventory->where('category_id', '2')->count();
-        $server = $this->inventory->where('category_id', '7')->count();
-        $handphone = $this->inventory->where('category_id', '22')->count();
+        $laptop = $this->inventory->where('category_id', '1')->count();
+        $monitor = $this->inventory->where('category_id', '7')->count();
+        $server = $this->inventory->where('category_id', '4')->count();
+        $handphone = $this->inventory->where('category_id', '5')->count();
         $inventories = compact('deployed', 'storage', 'inservice', 'broken', 'laptop', 'monitor', 'server', 'handphone');
 
         return $this->sendResponse($inventories, 'Dashboard list');

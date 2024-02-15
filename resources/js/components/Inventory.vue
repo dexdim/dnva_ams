@@ -112,7 +112,9 @@
                                                         v-bind:class="{
                                                             'badge badge-success':
                                                                 inventory.status ===
-                                                                'Deployed',
+                                                                    'Deployed' ||
+                                                                inventory.status ===
+                                                                    'Working',
                                                             'badge badge-primary':
                                                                 inventory.status ===
                                                                 'Storage',
@@ -121,7 +123,9 @@
                                                                 'In Service',
                                                             'badge badge-danger':
                                                                 inventory.status ===
-                                                                'Broken',
+                                                                    'Broken' ||
+                                                                inventory.status ===
+                                                                    'Lost',
                                                             'badge badge-secondary':
                                                                 inventory.status ===
                                                                 'Sold'

@@ -1,12 +1,12 @@
-let mix = require("laravel-mix");
+let mix = require('laravel-mix')
 
-mix.js("resources/js/app.js", "public/js")
+mix.js('resources/js/app.js', 'public/js')
     .vue({ version: 2 })
-    .sass("resources/sass/app.scss", "public/css")
-    .sourceMaps();
+    .sass('resources/sass/app.scss', 'public/css')
+    .sourceMaps()
 
 mix.webpackConfig({
     stats: {
-        children: true,
-    },
-});
+        children: true
+    }
+})

@@ -50,6 +50,7 @@ class EmployeeController extends BaseController
     {
         $employees = $this->employee->create([
             'name' => $request->get('name'),
+            'idkaryawan' => $request->get('idkaryawan'),
             'email' => $request->get('email'),
             'dept' => $request->get('dept'),
         ]);

@@ -29,6 +29,7 @@
                                         <tr>
                                             <th width="5%">ID</th>
                                             <th width="20%">Name</th>
+                                            <th width="10%">ID Karyawan</th>
                                             <th>Email</th>
                                             <th>Department</th>
                                             <th width="10%">Action</th>
@@ -44,6 +45,9 @@
                                             </td>
                                             <td class="text-capitalize">
                                                 {{ employee.name }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ employee.idkaryawan }}
                                             </td>
                                             <td>{{ employee.email }}</td>
                                             <td>{{ employee.dept }}</td>
@@ -148,6 +152,23 @@
                                     ></has-error>
                                 </div>
                                 <div class="form-group">
+                                    <label>ID Karyawan</label>
+                                    <input
+                                        v-model="form.idkaryawan"
+                                        type="text"
+                                        name="description"
+                                        class="form-control"
+                                        :class="{
+                                            'is-invalid':
+                                                form.errors.has('idkaryawan')
+                                        }"
+                                    />
+                                    <has-error
+                                        :form="form"
+                                        field="email"
+                                    ></has-error>
+                                </div>
+                                <div class="form-group">
                                     <label>Email</label>
                                     <input
                                         v-model="form.email"
@@ -221,8 +242,8 @@ export default {
             editmode: false,
             employees: {},
             form: new Form({
-                id: '',
                 name: '',
+                idkaryawan: '',
                 email: '',
                 dept: ''
             })

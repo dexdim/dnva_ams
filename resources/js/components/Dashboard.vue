@@ -78,9 +78,9 @@
                             <!-- MAP & BOX PANE -->
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">
-                                        Device in Storage
-                                    </h3>
+                                    <div class="card-title">
+                                        <h5>Device Status</h5>
+                                    </div>
                                     <div class="card-tools">
                                         <button
                                             type="button"
@@ -92,7 +92,10 @@
                                     </div>
                                 </div>
                                 <!-- /.card-header -->
-                                <div class="card-body p-0">
+                                <div class="card-body">
+                                    <div class="card-title badge badge-success">
+                                        <h6>Storage</h6>
+                                    </div>
                                     <div class="table-responsive">
                                         <table
                                             class="table table-hover table-bordered table-condensed"
@@ -101,14 +104,14 @@
                                                 class="thead-dark text-center"
                                             >
                                                 <tr>
-                                                    <th width="10%">ID Code</th>
+                                                    <th width="15%">ID Code</th>
                                                     <th width="10%">
                                                         Category
                                                     </th>
                                                     <th width="50%">
                                                         Description
                                                     </th>
-                                                    <th width="30%">
+                                                    <th width="25%">
                                                         User History
                                                     </th>
                                                 </tr>
@@ -161,12 +164,83 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div class="card-title badge badge-danger">
+                                        <h6>Broken</h6>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table
+                                            class="table table-hover table-bordered table-condensed"
+                                        >
+                                            <thead
+                                                class="thead-dark text-center"
+                                            >
+                                                <tr>
+                                                    <th width="15%">ID Code</th>
+                                                    <th width="10%">
+                                                        Category
+                                                    </th>
+                                                    <th width="50%">
+                                                        Description
+                                                    </th>
+                                                    <th width="25%">
+                                                        User History
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    v-for="inbroken in inBroken.data"
+                                                    :key="inbroken.id"
+                                                >
+                                                    <td
+                                                        class="text-center text-bold"
+                                                        style="
+                                                            vertical-align: middle;
+                                                        "
+                                                    >
+                                                        <a
+                                                            href="pages/examples/invoice.html"
+                                                            >{{
+                                                                inbroken.idcode
+                                                            }}</a
+                                                        >
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            vertical-align: middle;
+                                                        "
+                                                    >
+                                                        {{
+                                                            inbroken.category
+                                                                .name
+                                                        }}
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            vertical-align: middle;
+                                                        "
+                                                    >
+                                                        {{
+                                                            inbroken.description
+                                                        }}
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            vertical-align: middle;
+                                                        "
+                                                    >
+                                                        {{ inbroken.history }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <div class="pagination-container">
                                         <pagination
-                                            :data="inStorage"
+                                            :data="inBroken"
                                             @pagination-change-page="
                                                 loadInStorage
                                             "
@@ -175,9 +249,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- /.card -->
-                            <!-- /.card -->
                         </div>
+
                         <!-- /.col -->
 
                         <div class="col-md-4">
@@ -241,7 +314,7 @@
                 </div>
             </section>
         </div>
-        <!--<pre>{{ counts }}</pre>-->
+        <!--<pre>{{ inBroken }}</pre>-->
         <!--/. container-fluid -->
     </section>
 </template>
@@ -251,8 +324,8 @@ export default {
     data() {
         return {
             counts: [],
-            inStorage: [],
-            inService: []
+            inStorage: {},
+            inBroken: {}
         }
     },
     methods: {
@@ -263,10 +336,17 @@ export default {
                 .catch((error) => console.log(error))
         },
 
-        loadInStorage() {
+        loadInStorage(page = 1) {
             axios
-                .get('/api/dashboard/instorage')
+                .get(`/api/dashboard/instorage?page=${page}`)
                 .then((data) => (this.inStorage = data.data.data))
+                .catch((error) => console.log(error))
+        },
+
+        loadInBroken() {
+            axios
+                .get('/api/dashboard/inbroken')
+                .then((data) => (this.inBroken = data.data.data))
                 .catch((error) => console.log(error))
         },
 
@@ -284,6 +364,7 @@ export default {
         this.$Progress.start()
         this.loadCount()
         this.loadInStorage()
+        this.loadInBroken()
         this.loadInService()
         this.$Progress.finish()
     }

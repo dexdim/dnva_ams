@@ -38,7 +38,9 @@ class EmployeeRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:100',
+            'idkaryawan' => 'required|string|max:100',
             'email' => 'required|string|max:100',
+            'dept' => 'required|string|max:100',
         ];
     }
 
@@ -51,7 +53,9 @@ class EmployeeRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:100',
+            'idkaryawan' => 'required|string|max:100',
             'email' => 'required|string|max:100',
+            'dept' => 'required|string|max:100',
         ];
     }
 }
