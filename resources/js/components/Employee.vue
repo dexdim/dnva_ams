@@ -242,6 +242,7 @@ export default {
             editmode: false,
             employees: {},
             form: new Form({
+                id: '',
                 name: '',
                 idkaryawan: '',
                 email: '',

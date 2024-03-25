@@ -14,9 +14,11 @@
         "guzzlehttp/guzzle": "^7.4.5",
         "laravel/framework": "^8.12",
         "laravel/passport": "^10.0",
+        "laravel/socialite": "^5.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
-        "maatwebsite/excel": "^3.1"
+        "maatwebsite/excel": "^3.1",
+        "socialiteproviders/laravelpassport": "^4.3"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
