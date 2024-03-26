@@ -26,7 +26,7 @@ Route::get('/loginpr', function () {
 
 Route::get('auth/callback', function () {
     $user = Socialite::driver('laravelpassport')->user();
-    $email = ['andika@domainesia.com'];
+    $email = ['adimas@domainesia.com', 'kinan@domainesia.com', 'willih@domainesia.com'];
     if (in_array($user->getEmail(), $email)) {
         $checkuser = User::where('email', $user->getEmail())->firstOrFail();
         Auth::login($checkuser);
