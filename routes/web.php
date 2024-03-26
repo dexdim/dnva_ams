@@ -26,7 +26,7 @@ Route::get('/loginpr', function () {
 
 Route::get('auth/callback', function () {
     $user = Socialite::driver('laravelpassport')->user();
-    $email = ['adimas@domainesia.com', 'kinan@domainesia.com', 'willih@domainesia.com'];
+    $email = ['adimas@domainesia.com', 'kinan@domainesia.com', 'willih@domainesia.com', 'andika@domainesia.com'];
     if (in_array($user->getEmail(), $email)) {
         $checkuser = User::where('email', $user->getEmail())->firstOrFail();
         Auth::login($checkuser);
@@ -40,7 +40,7 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('home', function () {
-    return redirect('/inventory');
+    return redirect('/dashboard');
 });
 
 

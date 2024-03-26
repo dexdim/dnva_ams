@@ -130,7 +130,9 @@
                         <!-- <form @submit.prevent="createUser"> -->
                         <form
                             @submit.prevent="
-                                editmode ? updateEmployee() : createEmployee()
+                                editmode
+                                    ? updateEmployee(form.id)
+                                    : createEmployee(form.id)
                             "
                         >
                             <div class="modal-body">
@@ -262,10 +264,10 @@ export default {
             this.$Progress.finish()
         },
 
-        updateEmployee() {
+        updateEmployee(id) {
             this.$Progress.start()
             this.form
-                .put('/api/employee/' + this.form.id)
+                .put('/api/employee/' + id)
                 .then((response) => {
                     // success
                     $('#addNew').modal('hide')
