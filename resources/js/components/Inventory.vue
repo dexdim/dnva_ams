@@ -509,8 +509,26 @@
                                         ></has-error>
                                     </div>
                                 </div>
-
                                 <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label>Quantity</label>
+                                        <input
+                                            v-model="form.quantity"
+                                            type="number"
+                                            min="0"
+                                            value="0"
+                                            name="quantitiy"
+                                            class="form-control"
+                                            :class="{
+                                                'is-invalid':
+                                                    form.errors.has('quantity')
+                                            }"
+                                        />
+                                        <has-error
+                                            :form="form"
+                                            field="quantity"
+                                        ></has-error>
+                                    </div>
                                     <div class="form-group col-md-3">
                                         <label>Purchase Cost</label>
                                         <input
@@ -549,23 +567,6 @@
                                             field="purchasedate"
                                         ></has-error>
                                     </div>
-                                    <!--<div class="form-group col-md-3">
-                                        <label>Windows License</label>
-                                        <input
-                                            v-model="form.license"
-                                            type="text"
-                                            name="license"
-                                            class="form-control"
-                                            :class="{
-                                                'is-invalid':
-                                                    form.errors.has('license')
-                                            }"
-                                        />
-                                        <has-error
-                                            :form="form"
-                                            field="license"
-                                        ></has-error>
-                                    </div>-->
                                 </div>
 
                                 <div class="form-row">
@@ -757,6 +758,7 @@ export default {
                 brand: '',
                 serialnumber: '',
                 supplier: '',
+                quantity: '',
                 purchasecost: '',
                 purchasedate: '',
                 license: '',

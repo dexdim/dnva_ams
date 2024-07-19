@@ -77,6 +77,7 @@ class InventoryController extends BaseController
             'brand' => $request->get('brand'),
             'serialnumber' => $request->get('serialnumber'),
             'supplier' => $request->get('supplier'),
+            'quantity' => $request->get('quantity'),
             'purchasecost' => $request->get('purchasecost'),
             'purchasedate' => $request->get('purchasedate'),
             'license' => $request->get('license'),
