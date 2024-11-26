@@ -20,20 +20,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/loginpr', function () {
-    return Socialite::driver('laravelpassport')->redirect();
-});
+//Route::get('/loginpr', function () {
+//    return Socialite::driver('laravelpassport')->redirect();
+//});
 
-Route::get('auth/callback', function () {
-    $user = Socialite::driver('laravelpassport')->user();
-    $email = ['adimas@domainesia.com', 'kinan@domainesia.com', 'willih@domainesia.com'];
-    if (in_array($user->getEmail(), $email)) {
-        $checkuser = User::where('email', $user->getEmail())->firstOrFail();
-        Auth::login($checkuser);
-        return redirect('/home');
-    }
-    return 'Unauthorized';
-});
+//Route::get('auth/callback', function () {
+//    $user = Socialite::driver('laravelpassport')->user();
+//    $email = ['adimas@domainesia.com', 'kinan@domainesia.com', 'willih@domainesia.com'];
+//    if (in_array($user->getEmail(), $email)) {
+//        $checkuser = User::where('email', $user->getEmail())->firstOrFail();
+//        Auth::login($checkuser);
+//        return redirect('/home');
+//    }
+//    return 'Unauthorized';
+//});
 
 Auth::routes(['verify' => true]);
 
