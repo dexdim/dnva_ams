@@ -47,19 +47,19 @@ class InventoryController extends BaseController
 
     public function all()
     {
-        $inventories = $this->inventory->all();
+        $inventories = Inventory::all();
         return $this->sendResponse($inventories, 'All inventory list');
     }
 
     public function inStorage()
     {
-        $inventories = $this->inventory->where('status', 'Storage')->latest()->with('category', 'employee')->paginate(5);
+        $inventories = Inventory::where('status', 'Storage')->latest()->with('category', 'employee')->paginate(5);
         return $this->sendResponse($inventories, 'In Storage List');
     }
 
     public function inBroken()
     {
-        $inventories = $this->inventory->where('status', 'Broken')->latest()->with('category', 'employee')->paginate(5);
+        $inventories = Inventory::where('status', 'Broken')->latest()->with('category', 'employee')->paginate(5);
         return $this->sendResponse($inventories, 'In Storage List');
     }
 
@@ -70,7 +70,7 @@ class InventoryController extends BaseController
      */
     public function store(InventoryRequest $request)
     {
-        $inventories = $this->inventory->create([
+        $inventories = Inventory::create([
             'idcode' => $request->get('idcode'),
             'category_id' => $request->get('category_id'),
             'description' => $request->get('description'),
@@ -99,7 +99,7 @@ class InventoryController extends BaseController
      */
     public function show($id)
     {
-        $inventories = $this->inventory->with('category', 'employee')->findOrFail($id);
+        $inventories = Inventory::with('category', 'employee')->findOrFail($id);
         return $this->sendResponse($inventories, 'Inventory Details');
     }
 
@@ -111,7 +111,7 @@ class InventoryController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        $inventories = $this->inventory->findOrFail($id);
+        $inventories = Inventory::findOrFail($id);
         $inventories->update($request->all());
         return $this->sendResponse($inventories, 'Inventory information has been updated');
     }
@@ -123,7 +123,7 @@ class InventoryController extends BaseController
     public function destroy($id)
     {
         $this->authorize('isAdmin');
-        $inventories = $this->inventory->findOrFail($id);
+        $inventories = Inventory::findOrFail($id);
         $inventories->delete();
         return $this->sendResponse($inventories, 'Inventory has been deleted');
     }
@@ -137,14 +137,14 @@ class InventoryController extends BaseController
 
     public function counts()
     {
-        $deployed = $this->inventory->where('status', 'Deployed')->count();
-        $storage = $this->inventory->where('status', 'Storage')->count();
-        $inservice = $this->inventory->where('status', 'In Service')->count();
-        $broken = $this->inventory->where('status', 'Broken')->count();
-        $laptop = $this->inventory->where('category_id', '1')->count();
-        $monitor = $this->inventory->where('category_id', '7')->count();
-        $server = $this->inventory->where('category_id', '4')->count();
-        $handphone = $this->inventory->where('category_id', '5')->count();
+        $deployed = Inventory::where('status', 'Deployed')->count();
+        $storage = Inventory::where('status', 'Storage')->count();
+        $inservice = Inventory::where('status', 'In Service')->count();
+        $broken = Inventory::where('status', 'Broken')->count();
+        $laptop = Inventory::where('category_id', '1')->count();
+        $monitor = Inventory::where('category_id', '7')->count();
+        $server = Inventory::where('category_id', '4')->count();
+        $handphone = Inventory::where('category_id', '5')->count();
         $inventories = compact('deployed', 'storage', 'inservice', 'broken', 'laptop', 'monitor', 'server', 'handphone');
 
         return $this->sendResponse($inventories, 'Dashboard list');

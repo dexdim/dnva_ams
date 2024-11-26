@@ -161,7 +161,7 @@ class InventoryRepository implements InventoryRepositoryInterface
     public function __call($method, $arguments)
     {
         if (method_exists($this, $method)) {
-            return Model::__call('setModel', [$this->model])->setTable($this->model->table)->$method(...$arguments);
+            return Model::call('setModel', [$this->model])->setTable($this->model->table)->$method(...$arguments);
         } else {
             return $this->model->$method(...$arguments);
         }
